@@ -1,0 +1,59 @@
+# === Node & Package Managers ===
+/node_modules
+**/node_modules
+
+# pnpm store (optional – pnpm uses content-addressable store outside your repo)
+/.pnpm-store
+
+# Lockfiles (keep pnpm-lock.yaml, ignore others if you have ’em)
+/package-lock.json
+/yarn.lock
+
+# === Nx & Build Caches ===
+.nx/           # Nx’s local cache—safe to ignore and re-generate
+.cache/        # generic cache if used
+**/dist          # compiled output from Nx build targets
+**/apps/**/dist
+/libs/**/dist
+
+# CDK
+/infra/cdk/cdk.out
+# If you ever generate CloudFormation assets separately:
+/cdk.out
+
+# TypeScript
+*.tsbuildinfo
+
+# === Environment & Secrets ===
+.env
+.env.*.local
+secrets.local.json
+
+# === Logs & Reports ===
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/logs
+*.log
+
+# === Coverage ===
+/coverage
+
+# === IDEs & Editors ===
+.vscode/
+.idea/
+/*.suo
+/*.ntvs*
+*.code-workspace
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+
+# === Docker ===
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# === Misc ===
+*.local
