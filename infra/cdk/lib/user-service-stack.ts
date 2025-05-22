@@ -35,30 +35,23 @@ export class UserServiceStack extends Stack {
       generateSecret: false,
     });
 
-    // __dirname is infra/cdk/lib → climb up three levels to repo root
     const repoRoot = path.resolve(__dirname, '../../..');
-    // now point at the real NestJS source file under repoRoot/apps
-    const entryPath = path.join(
-      repoRoot,
-      'apps',
-      'user-service',
-      'src',
-      'main.ts'
-    );
+    const userServiceDir = path.join(repoRoot, 'apps', 'user-service');
+    const entryFile = path.join(userServiceDir, 'src', 'main.ts');
+    const tsconfigFile = path.join(userServiceDir, 'tsconfig.app.json');
 
     const userFn = new NodejsFunction(this, 'UserServiceFunction', {
       runtime: Runtime.NODEJS_18_X,
-      entry: entryPath,
+      entry: entryFile,
+      projectRoot: repoRoot,
+      depsLockFilePath: path.join(repoRoot, 'pnpm-lock.yaml'),
       handler: 'handler',
       bundling: {
-        tsconfig: path.join(
-          repoRoot,
-          'apps',
-          'user-service',
-          'tsconfig.app.json'
-        ),
+        tsconfig: tsconfigFile,
         minify: true,
         sourceMap: true,
+        // Add node_modules to external modules to reduce bundle size
+        externalModules: ['@aws-sdk/*', '@nestjs/*'],
       },
       memorySize: 512,
       timeout: Duration.seconds(30),
