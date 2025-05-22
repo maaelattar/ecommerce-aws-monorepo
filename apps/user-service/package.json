@@ -1,0 +1,13 @@
+{
+  "name": "user-service",
+  "version": "0.0.1",
+  "dependencies": {
+    "@nestjs/common": "^10.0.2",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/core": "^10.0.2",
+    "@piavart/nestjs-dynamodb": "0.0.1-draft2",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.0",
+    "tslib": "^2.3.0"
+  }
+}
